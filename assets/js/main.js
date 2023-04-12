@@ -31,30 +31,34 @@ const team = [
     },
   ];
 
-  const teamContainer = document.querySelector('.container');
+// Seleziona l'elemento HTML in cui inserire le card del team
+const teamContainer = document.getElementById("team-container");
 
-  const row1 = document.createElement('div');
-  row1.classList.add('row', 'justify-content-center', 'gap-3', 'py-3');
+// Crea le card del team dinamicamente utilizzando il ciclo for
+for (let i = 0; i < team.length; i++) {
+  // Crea i tag HTML per la card
+  const box = document.createElement("div");
+  box.classList.add("box");
   
-  const row2 = document.createElement('div');
-  row2.classList.add('row', 'justify-content-center', 'gap-3', 'py-3');
+  const imgBox = document.createElement("div");
+  imgBox.classList.add("imgBox");
   
-  teamContainer.appendChild(row1);
-  teamContainer.appendChild(row2);
+  const img = document.createElement("img");
+  img.src = "./assets/img/" + team[i].image;
   
-  for (let i = 0; i < team.length; i++) {
-  const member = team[i];
-  const card = '<div class="card col-4" style="width: 18rem;">' +
-               '<img src="./assets/img/' + member.image + '" class="card-img-top" alt="...">' +
-               '<div class="card-body text-center">' +
-               '<h5 class="card-title name">' + member.name + '</h5>' +
-               '<p class="card-text role">' + member.role + '</p>' +
-               '</div>' +
-               '</div>';
-
-  if (i < 3) {
-      row1.innerHTML += card;
-  } else {
-      row2.innerHTML += card;
-  }
+  const content = document.createElement("div");
+  content.classList.add("content");
+  
+  const name = document.createElement("h2");
+  name.classList.add("name");
+  name.innerHTML = team[i].name + "<br>" + "<span class='role'>" + team[i].role + "</span>";
+  
+  // Aggiungi i tag HTML creati alla card
+  imgBox.appendChild(img);
+  content.appendChild(name);
+  box.appendChild(imgBox);
+  box.appendChild(content);
+  
+  // Aggiungi la card al container del team
+  teamContainer.appendChild(box);
 }
